@@ -4,11 +4,9 @@
 #include <initializer_list>
 #include <nall/array.hpp>
 #include <nall/platform.hpp>
-#include <nall/sha256.hpp>
 #include <nall/utility.hpp>
 
 #include <nall/string/base.hpp>
-#include <nall/string/bsv.hpp>
 #include <nall/string/core.hpp>
 #include <nall/string/cast.hpp>
 #include <nall/string/compare.hpp>
@@ -24,7 +22,6 @@
 #include <nall/string/utility.hpp>
 #include <nall/string/variadic.hpp>
 #include <nall/string/wrapper.hpp>
-#include <nall/string/xml.hpp>
 
 namespace nall {
   template<> struct has_length<string> { enum { value = true }; };
