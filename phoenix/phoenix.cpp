@@ -13,14 +13,6 @@
   #include <commctrl.h>
   #include <io.h>
   #include <shlobj.h>
-#elif defined(PHOENIX_QT)
-#ifdef __APPLE__
-  #include <QtGui/QApplication>
-  #include <QtGui/QtGui>
-#else
-  #include <QApplication>
-  #include <QtGui>
-#endif
 #elif defined(PHOENIX_GTK)
   #define None
   #define Window X11Window

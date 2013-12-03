@@ -5,8 +5,6 @@
 
 #if defined(PHOENIX_WINDOWS)
   #include "../windows/windows.cpp"
-#elif defined(PHOENIX_QT)
-  #include "../qt/qt.cpp"
 #elif defined(PHOENIX_GTK)
   #include "../gtk/gtk.cpp"
 #elif defined(PHOENIX_REFERENCE)
