@@ -1,17 +1,5 @@
 /* Global Headers */
 
-#if defined(VIDEO_QTOPENGL) || defined(VIDEO_QTRASTER)
-  #include <QApplication>
-  #include <QtGui>
-#endif
-
-#if defined(VIDEO_QTOPENGL)
-  #include <QGLWidget>
-  #if defined(PLATFORM_WIN)
-    #include <GL/glext.h>
-  #endif
-#endif
-
 #if defined(PLATFORM_X)
   #include <X11/Xlib.h>
   #include <X11/Xutil.h>

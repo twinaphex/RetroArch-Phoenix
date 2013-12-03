@@ -37,10 +37,6 @@ const char* VideoInterface::default_driver() {
   return "DirectDraw";
   #elif defined(VIDEO_GDI)
   return "GDI";
-  #elif defined(VIDEO_QTOPENGL)
-  return "Qt-OpenGL";
-  #elif defined(VIDEO_QTRASTER)
-  return "Qt-Raster";
   #elif defined(VIDEO_SDL)
   return "SDL";
   #elif defined(VIDEO_XV)
@@ -80,16 +76,8 @@ const char* VideoInterface::driver_list() {
   "OpenGL;"
   #endif
 
-  #if defined(VIDEO_QTOPENGL)
-  "Qt-OpenGL;"
-  #endif
-
   #if defined(VIDEO_XV)
   "X-Video;"
-  #endif
-
-  #if defined(VIDEO_QTRASTER)
-  "Qt-Raster;"
   #endif
 
   #if defined(VIDEO_SDL)
