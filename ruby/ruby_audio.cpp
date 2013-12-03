@@ -1,5 +1,3 @@
-const char *Audio::Handle = "Handle";
-
 AudioInterface::AudioInterface() {
 }
 
