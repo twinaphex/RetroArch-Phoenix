@@ -13,7 +13,6 @@
 #include <nall/bit.hpp>
 #include <nall/detect.hpp>
 #include <nall/input.hpp>
-#include <nall/sort.hpp>
 #include <stdint.h>
 #include <nall/string.hpp>
 #include <nall/vector.hpp>
