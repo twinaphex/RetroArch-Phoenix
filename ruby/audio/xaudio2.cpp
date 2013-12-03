@@ -62,13 +62,11 @@ public:
 
     if(name == Audio::Frequency) {
       settings.frequency = any_cast<unsigned>(value);
-      if(pXAudio2) init();
       return true;
     }
 
     if(name == Audio::Latency) {
       settings.latency = any_cast<unsigned>(value);
-      if(pXAudio2) init();
       return true;
     }
 
@@ -84,27 +82,6 @@ public:
     pSourceVoice->SubmitSourceBuffer(&xa2buffer);
   }
 
-  void sample(uint16_t left, uint16_t right) {
-    device.buffer[device.writebuffer * device.latency + device.bufferoffset++] = left + (right << 16);
-    if(device.bufferoffset < device.latency) return;
-    device.bufferoffset = 0;
-
-    if(device.submitbuffers == device.buffers - 1) {
-      if(settings.synchronize == true) {
-        //wait until there is at least one other free buffer for the next sample
-        while(device.submitbuffers == device.buffers - 1) {
-          //Sleep(0);
-        }
-      } else { //we need one free buffer for the next sample, so ignore the current contents
-        return;
-      }
-    }
-    
-    pushbuffer(device.latency * 4,device.buffer + device.writebuffer * device.latency);
-
-    device.writebuffer = (device.writebuffer + 1) % device.buffers;
-  }
-
   void clear() {
     if(!pSourceVoice) return;
     pSourceVoice->Stop(0);
@@ -118,63 +95,6 @@ public:
      pSourceVoice->Start(0);
   }
 
-  bool init() {
-    term();
-
-    device.buffers   = 8;
-    device.latency = settings.frequency * settings.latency / device.buffers / 1000.0 + 0.5;
-    device.buffer  = new uint32_t[device.latency * device.buffers];
-    device.bufferoffset = 0;
-    device.submitbuffers = 0;
-
-    HRESULT hr;
-    if(FAILED(hr = XAudio2Create(&pXAudio2, 0 , XAUDIO2_DEFAULT_PROCESSOR))) {
-      return false;
-    }
-    
-    if(FAILED(hr = pXAudio2->CreateMasteringVoice( &pMasterVoice, 2,
-        settings.frequency, 0, 0 , NULL))) {
-      return false;
-    }
-
-    WAVEFORMATEX wfx;
-    wfx.wFormatTag = WAVE_FORMAT_PCM;
-    wfx.nChannels = 2;
-    wfx.nSamplesPerSec = settings.frequency;
-    wfx.nBlockAlign = 4;
-    wfx.wBitsPerSample = 16;
-    wfx.nAvgBytesPerSec = wfx.nSamplesPerSec * wfx.nBlockAlign;
-    wfx.cbSize = 0;
-
-    if(FAILED(hr = pXAudio2->CreateSourceVoice(&pSourceVoice, (WAVEFORMATEX*)&wfx,
-        XAUDIO2_VOICE_NOSRC , XAUDIO2_DEFAULT_FREQ_RATIO, this, NULL, NULL))) {
-      return false;
-    }
-
-    clear();
-    return true;
-  }
-
-  void term() {
-    if(pSourceVoice) {
-      pSourceVoice->Stop(0);
-      pSourceVoice->DestroyVoice();
-      pSourceVoice = 0;
-    }
-    if(pMasterVoice) {
-      pMasterVoice->DestroyVoice();
-      pMasterVoice = 0;
-    }
-    if(pXAudio2) {
-      pXAudio2->Release();
-      pXAudio2 = NULL;
-    }
-    if(device.buffer) {
-      delete[] device.buffer;
-      device.buffer = 0;
-    }
-  }
-  
   STDMETHODIMP_(void) OnBufferEnd(void *pBufferContext) {
     InterlockedDecrement(&device.submitbuffers);
   }

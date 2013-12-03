@@ -9,9 +9,6 @@ public:
   virtual nall::any get(const nall::string& name) { return false; }
   virtual bool set(const nall::string& name, const nall::any& value) { return false; }
 
-  virtual bool init() { return true; }
-  virtual void term() {}
-
   Audio() {}
   virtual ~Audio() {}
 };

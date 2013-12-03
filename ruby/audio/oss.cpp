@@ -51,47 +51,13 @@ public:
   bool set(const string& name, const any& value) {
     if(name == Audio::Frequency) {
       settings.frequency = any_cast<unsigned>(value);
-      if(device.fd > 0) init();
       return true;
     }
 
     return false;
   }
 
-  void sample(uint16_t sl, uint16_t sr) {
-    uint32_t sample = sl + (sr << 16);
-    unsigned unused = write(device.fd, &sample, 4);
-  }
-
   void clear() {
-  }
-
-  bool init() {
-    term();
-
-    device.fd = open(device.name, O_WRONLY, O_NONBLOCK);
-    if(device.fd < 0) return false;
-
-    #if 1 //SOUND_VERSION >= 0x040000
-    //attempt to enable OSS4-specific features regardless of version
-    //OSS3 ioctl calls will silently fail, but sound will still work
-    int cooked = 1, policy = 4; //policy should be 0 - 10, lower = less latency, more CPU usage
-    ioctl(device.fd, SNDCTL_DSP_COOKEDMODE, &cooked);
-    ioctl(device.fd, SNDCTL_DSP_POLICY, &policy);
-    #endif
-    int freq = settings.frequency;
-    ioctl(device.fd, SNDCTL_DSP_CHANNELS, &device.channels);
-    ioctl(device.fd, SNDCTL_DSP_SETFMT, &device.format);
-    ioctl(device.fd, SNDCTL_DSP_SPEED, &freq);
-
-    return true;
-  }
-
-  void term() {
-    if(device.fd > 0) {
-      close(device.fd);
-      device.fd = -1;
-    }
   }
 
   pAudioOSS() {
@@ -104,7 +70,6 @@ public:
   }
 
   ~pAudioOSS() {
-    term();
   }
 };
 

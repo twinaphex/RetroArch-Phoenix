@@ -171,49 +171,12 @@ VideoInterface::~VideoInterface() { term(); }
 /* AudioInterface */
 
 void AudioInterface::driver(const char *driver) {
-  if(p) term();
-
-  if(!driver || !*driver) driver = default_driver();
-
-  if(0);
-
-  #ifdef AUDIO_ALSA
-  else if(!strcmp(driver, "ALSA")) p = new AudioALSA();
-  #endif
-
-  #ifdef AUDIO_AO
-  else if(!strcmp(driver, "libao")) p = new AudioAO();
-  #endif
-
-  #ifdef AUDIO_DIRECTSOUND
-  else if(!strcmp(driver, "DirectSound")) p = new AudioDS();
-  #endif
-
-  #ifdef AUDIO_OPENAL
-  else if(!strcmp(driver, "OpenAL")) p = new AudioOpenAL();
-  #endif
-
-  #ifdef AUDIO_OSS
-  else if(!strcmp(driver, "OSS")) p = new AudioOSS();
-  #endif
-
-  #ifdef AUDIO_PULSEAUDIO
-  else if(!strcmp(driver, "PulseAudio")) p = new AudioPulseAudio();
-  #endif
-
-  #ifdef AUDIO_PULSEAUDIOSIMPLE
-  else if(!strcmp(driver, "PulseAudioSimple")) p = new AudioPulseAudioSimple();
-  #endif
-
-  #ifdef AUDIO_XAUDIO2
-  else if(!strcmp(driver, "XAudio2")) p = new AudioXAudio2();
-  #endif
-
-  else p = new Audio();
+  driver = default_driver();
 }
 
 //select the *safest* available driver, not the fastest
-const char* AudioInterface::default_driver() {
+const char* AudioInterface::default_driver()
+{
   #if defined(AUDIO_DIRECTSOUND)
   return "DirectSound";
   #elif defined(AUDIO_XAUDIO2)
@@ -236,7 +199,8 @@ const char* AudioInterface::default_driver() {
 }
 
 //returns list of available drivers, sorted from most to least optimal
-const char* AudioInterface::driver_list() {
+const char* AudioInterface::driver_list()
+{
   return
 
   //Windows
