@@ -22,9 +22,6 @@ InputInterface input;
 /* VideoInterface */
 
 const char *Video::Handle = "Handle";
-const char *Video::Synchronize = "Synchronize";
-const char *Video::Filter = "Filter";
-const char *Video::Shader = "Shader";
 
 void VideoInterface::driver(const char *driver) {
   driver = default_driver();

@@ -1,7 +1,4 @@
 const char *Audio::Handle = "Handle";
-const char *Audio::Synchronize = "Synchronize";
-const char *Audio::Frequency = "Frequency";
-const char *Audio::Latency = "Latency";
 
 bool AudioInterface::cap(const string& name) {
   return p ? p->cap(name) : false;
