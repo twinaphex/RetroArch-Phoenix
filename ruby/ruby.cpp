@@ -25,53 +25,9 @@ const char *Video::Handle = "Handle";
 const char *Video::Synchronize = "Synchronize";
 const char *Video::Filter = "Filter";
 const char *Video::Shader = "Shader";
-const char *Video::FragmentShader = "FragmentShader";
-const char *Video::VertexShader = "VertexShader";
 
 void VideoInterface::driver(const char *driver) {
-  if(p) term();
-
-  if(!driver || !*driver) driver = default_driver();
-
-  if(0);
-
-  #ifdef VIDEO_DIRECT3D
-  else if(!strcmp(driver, "Direct3D")) p = new VideoD3D();
-  #endif
-
-  #ifdef VIDEO_DIRECTDRAW
-  else if(!strcmp(driver, "DirectDraw")) p = new VideoDD();
-  #endif
-
-  #ifdef VIDEO_GDI
-  else if(!strcmp(driver, "GDI")) p = new VideoGDI();
-  #endif
-
-  #ifdef VIDEO_GLX
-  else if(!strcmp(driver, "OpenGL")) p = new VideoGLX();
-  #endif
-
-  #ifdef VIDEO_QTOPENGL
-  else if(!strcmp(driver, "Qt-OpenGL")) p = new VideoQtOpenGL();
-  #endif
-
-  #ifdef VIDEO_QTRASTER
-  else if(!strcmp(driver, "Qt-Raster")) p = new VideoQtRaster();
-  #endif
-
-  #ifdef VIDEO_SDL
-  else if(!strcmp(driver, "SDL")) p = new VideoSDL();
-  #endif
-
-  #ifdef VIDEO_WGL
-  else if(!strcmp(driver, "OpenGL")) p = new VideoWGL();
-  #endif
-
-  #ifdef VIDEO_XV
-  else if(!strcmp(driver, "X-Video")) p = new VideoXv();
-  #endif
-
-  else p = new Video();
+  driver = default_driver();
 }
 
 //select the *safest* available driver, not the fastest
@@ -146,27 +102,11 @@ const char* VideoInterface::driver_list() {
   "None";
 }
 
-bool VideoInterface::init() {
-  if(!p) driver();
-  return p->init();
-}
-
-void VideoInterface::term() {
-  if(p) {
-    delete p;
-    p = 0;
-  }
-}
-
 bool VideoInterface::cap(const string& name) { return p ? p->cap(name) : false; }
 any VideoInterface::get(const string& name) { return p ? p->get(name) : false; }
 bool VideoInterface::set(const string& name, const any& value) { return p ? p->set(name, value) : false; }
-bool VideoInterface::lock(uint32_t *&data, unsigned &pitch, unsigned width, unsigned height) { return p ? p->lock(data, pitch, width, height) : false; }
-void VideoInterface::unlock() { if(p) p->unlock(); }
-void VideoInterface::clear() { if(p) p->clear(); }
-void VideoInterface::refresh() { if(p) p->refresh(); }
 VideoInterface::VideoInterface() : p(0) {}
-VideoInterface::~VideoInterface() { term(); }
+VideoInterface::~VideoInterface() { }
 
 /* AudioInterface */
 
