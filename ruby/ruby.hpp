@@ -20,8 +20,6 @@
 
 namespace ruby {
 
-#include <ruby/video.hpp>
-#include <ruby/audio.hpp>
 #include <ruby/input.hpp>
 
 class VideoInterface {

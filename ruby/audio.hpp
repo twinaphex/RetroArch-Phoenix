@@ -1,4 +1,0 @@
-class Audio {
-public:
-  Audio() {}
-};
