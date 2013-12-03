@@ -21,8 +21,6 @@ InputInterface input;
 
 /* VideoInterface */
 
-const char *Video::Handle = "Handle";
-
 void VideoInterface::driver(const char *driver) {
   driver = default_driver();
 }
