@@ -99,10 +99,7 @@ const char* VideoInterface::driver_list() {
   "None";
 }
 
-bool VideoInterface::cap(const string& name) { return p ? p->cap(name) : false; }
-any VideoInterface::get(const string& name) { return p ? p->get(name) : false; }
-bool VideoInterface::set(const string& name, const any& value) { return p ? p->set(name, value) : false; }
-VideoInterface::VideoInterface() : p(0) {}
+VideoInterface::VideoInterface() {}
 VideoInterface::~VideoInterface() { }
 
 /* AudioInterface */
