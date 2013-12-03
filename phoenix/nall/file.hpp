@@ -2,7 +2,7 @@
 #define NALL_FILE_HPP
 
 #include <nall/platform.hpp>
-#include <nall/stdint.hpp>
+#include <stdint.h>
 #include <nall/string.hpp>
 #include <nall/utility.hpp>
 #include <nall/windows/utf8.hpp>

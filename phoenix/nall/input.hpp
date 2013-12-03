@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 
-#include <nall/stdint.hpp>
 #include <nall/string.hpp>
 
 namespace nall {

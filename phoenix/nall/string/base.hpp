@@ -5,9 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include <nall/concept.hpp>
 #include <nall/function.hpp>
-#include <nall/stdint.hpp>
 #include <nall/vector.hpp>
 #include <nall/windows/utf8.hpp>
 
