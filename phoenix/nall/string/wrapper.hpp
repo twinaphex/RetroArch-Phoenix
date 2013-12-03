@@ -8,9 +8,6 @@ unsigned string::length() const { return strlen(data); }
 bool string::equals(const char *str) const { return !strcmp(data, str); }
 bool string::iequals(const char *str) const { return !istrcmp(data, str); }
 
-bool string::wildcard(const char *str) const { return nall::wildcard(data, str); }
-bool string::iwildcard(const char *str) const { return nall::iwildcard(data, str); }
-
 bool string::beginswith(const char *str) const { return strbegin(data, str); }
 bool string::ibeginswith(const char *str) const { return istrbegin(data, str); }
 

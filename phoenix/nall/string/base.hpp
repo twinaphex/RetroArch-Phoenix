@@ -110,17 +110,6 @@ namespace nall {
     template<unsigned Limit, bool Insensitive, bool Quoted> inline lstring& usplit(const char*, const char*);
   };
 
-  //compare.hpp
-  inline char chrlower(char c);
-  inline char chrupper(char c);
-  inline int istrcmp(const char *str1, const char *str2);
-  inline bool wildcard(const char *str, const char *pattern);
-  inline bool iwildcard(const char *str, const char *pattern);
-  inline bool strbegin(const char *str, const char *key);
-  inline bool istrbegin(const char *str, const char *key);
-  inline bool strend(const char *str, const char *key);
-  inline bool istrend(const char *str, const char *key);
-
   //convert.hpp
   inline char* strlower(char *str);
   inline char* strupper(char *str);
