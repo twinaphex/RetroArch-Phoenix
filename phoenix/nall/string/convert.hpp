@@ -167,11 +167,6 @@ uintmax_t binary(const char *str) {
 
   return result;
 }
-
-double fp(const char *str) {
-  return atof(str);
-}
-
 }
 
 #endif

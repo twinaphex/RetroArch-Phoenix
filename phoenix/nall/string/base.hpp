@@ -94,7 +94,6 @@ namespace nall {
   inline intmax_t integer(const char *str);
   inline uintmax_t decimal(const char *str);
   inline uintmax_t binary(const char *str);
-  inline double fp(const char *str);
 
   //platform.hpp
   inline string realpath(const char *name);
