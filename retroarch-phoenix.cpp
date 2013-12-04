@@ -28,6 +28,10 @@
 using namespace nall;
 using namespace phoenix;
 
+template<typename... Args> static inline void print(Args&&... args) {
+  printf("%s", (const char*)string(std::forward<Args>(args)...));
+}
+
 namespace Internal
 {
    extern "C"
@@ -89,7 +93,8 @@ namespace Internal
    static void sigchld_handle(int)
    {
       if (async)
-         while (waitpid(-1, NULL, WNOHANG) > 0) print("Reaped zombie ...\n");
+         while (waitpid(-1, NULL, WNOHANG) > 0)
+            print("Reaped zombie ...\n");
       else
       {
          int pstatus;

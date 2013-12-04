@@ -18,7 +18,6 @@
 #include <nall/string/replace.hpp>
 #include <nall/string/split.hpp>
 #include <nall/string/utility.hpp>
-#include <nall/string/variadic.hpp>
 #include <nall/string/wrapper.hpp>
 
 namespace nall {
