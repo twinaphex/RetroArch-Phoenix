@@ -11,7 +11,6 @@
 #include <nall/string/cast.hpp>
 #include <nall/string/compare.hpp>
 #include <nall/string/convert.hpp>
-#include <nall/string/filename.hpp>
 #include <nall/string/platform.hpp>
 #include <nall/string/strl.hpp>
 #include <nall/string/strpos.hpp>

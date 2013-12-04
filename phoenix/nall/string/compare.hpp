@@ -68,7 +68,8 @@ static inline bool strbegin(const char *str, const char *key)
 {
    int i, ssl = strlen(str), ksl = strlen(key);
 
-   if(ksl > ssl) return false;
+   if(ksl > ssl)
+      return false;
    return (!memcmp(str, key, ksl));
 }
 
