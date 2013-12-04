@@ -23,12 +23,6 @@ namespace nall {
     inline optional<T>& operator=(const optional<T> &source) { valid = source.valid; value = source.value; return *this; }
     inline optional(bool valid, const T &value) : valid(valid), value(value) {}
   };
-
-  template<typename T> inline T* allocate(unsigned size, const T &value) {
-    T *array = new T[size];
-    for(unsigned i = 0; i < size; i++) array[i] = value;
-    return array;
-  }
 }
 
 #endif
