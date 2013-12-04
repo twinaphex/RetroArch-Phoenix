@@ -111,11 +111,6 @@ namespace nall {
   };
 
   //convert.hpp
-  inline char* strlower(char *str);
-  inline char* strupper(char *str);
-  inline char* qstrlower(char *str);
-  inline char* qstrupper(char *str);
-  inline char* strtr(char *dest, const char *before, const char *after);
   inline uintmax_t hex(const char *str);
   inline intmax_t integer(const char *str);
   inline uintmax_t decimal(const char *str);

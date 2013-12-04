@@ -1,64 +1,96 @@
 #ifndef NALL_STRING_CONVERT_HPP
 #define NALL_STRING_CONVERT_HPP
 
-namespace nall {
+static inline char*strlower(char *str)
+{
+   int i;
+   if(!str)
+      return 0;
+   i = 0;
 
-char* strlower(char *str) {
-  if(!str) return 0;
-  int i = 0;
-  while(str[i]) {
-    str[i] = chrlower(str[i]);
-    i++;
-  }
-  return str;
+   while(str[i])
+   {
+      str[i] = chrlower(str[i]);
+      i++;
+   }
+   return str;
 }
 
-char* strupper(char *str) {
-  if(!str) return 0;
-  int i = 0;
-  while(str[i]) {
-    str[i] = chrupper(str[i]);
-    i++;
-  }
-  return str;
+static inline char* strupper(char *str)
+{
+   int i;
+   if(!str)
+      return 0;
+   i = 0;
+   while(str[i])
+   {
+      str[i] = chrupper(str[i]);
+      i++;
+   }
+   return str;
 }
 
-char* qstrlower(char *s) {
-  if(!s) return 0;
-  bool quoted = false;
-  while(*s) {
-    if(*s == '\"' || *s == '\'') quoted ^= 1;
-    if(quoted == false && *s >= 'A' && *s <= 'Z') *s += 0x20;
-    s++;
-  }
+static inline char* qstrlower(char *s)
+{
+   bool quoted;
+   if(!s)
+      return 0;
+   quoted = false;
+   while(*s)
+   {
+      if(*s == '\"' || *s == '\'')
+         quoted ^= 1;
+      if(quoted == false && *s >= 'A' && *s <= 'Z')
+         *s += 0x20;
+      s++;
+   }
 }
 
-char* qstrupper(char *s) {
-  if(!s) return 0;
-  bool quoted = false;
-  while(*s) {
-    if(*s == '\"' || *s == '\'') quoted ^= 1;
-    if(quoted == false && *s >= 'a' && *s <= 'z') *s -= 0x20;
-    s++;
-  }
+static inline char* qstrupper(char *s)
+{
+   bool quoted;
+   if(!s)
+      return 0;
+   quoted = false;
+   while(*s)
+   {
+      if(*s == '\"' || *s == '\'')
+         quoted ^= 1;
+      if(quoted == false && *s >= 'a' && *s <= 'z')
+         *s -= 0x20;
+      s++;
+   }
 }
 
-char* strtr(char *dest, const char *before, const char *after) {
-  if(!dest || !before || !after) return dest;
-  int sl = strlen(dest), bsl = strlen(before), asl = strlen(after);
+static inline char* strtr(char *dest, const char *before, const char *after)
+{
+   int sl, bsl, asl, i, l;
+   if(!dest || !before || !after)
+      return dest;
 
-  if(bsl != asl || bsl == 0) return dest;  //patterns must be the same length for 1:1 replace
-  for(unsigned i = 0; i < sl; i++) {
-    for(unsigned l = 0; l < bsl; l++) {
-      if(dest[i] == before[l]) {
-        dest[i] = after[l];
-        break;
+   sl = strlen(dest);
+   bsl = strlen(before);
+   asl = strlen(after);
+
+   if(bsl != asl || bsl == 0)
+      return dest;  //patterns must be the same length for 1:1 replace
+   for(i = 0; i < sl; i++)
+   {
+      for(l = 0; l < bsl; l++)
+      {
+         if(dest[i] == before[l])
+         {
+            dest[i] = after[l];
+            break;
+         }
       }
-    }
-  }
+   }
 
-  return dest;
+   return dest;
 }
+
+namespace nall
+{
 
 uintmax_t hex(const char *str) {
   if(!str) return 0;

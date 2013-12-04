@@ -14,11 +14,11 @@ bool string::ibeginswith(const char *str) const { return istrbegin(data, str); }
 bool string::endswith(const char *str) const { return strend(data, str); }
 bool string::iendswith(const char *str) const { return istrend(data, str); }
 
-string& string::lower() { nall::strlower(data); return *this; }
-string& string::upper() { nall::strupper(data); return *this; }
-string& string::qlower() { nall::qstrlower(data); return *this; }
-string& string::qupper() { nall::qstrupper(data); return *this; }
-string& string::transform(const char *before, const char *after) { nall::strtr(data, before, after); return *this; }
+string& string::lower() { strlower(data); return *this; }
+string& string::upper() { strupper(data); return *this; }
+string& string::qlower() { qstrlower(data); return *this; }
+string& string::qupper() { qstrupper(data); return *this; }
+string& string::transform(const char *before, const char *after) { strtr(data, before, after); return *this; }
 
 template<unsigned limit> string& string::ltrim(const char *key) { nall::ltrim<limit>(data, key); return *this; }
 template<unsigned limit> string& string::rtrim(const char *key) { nall::rtrim<limit>(data, key); return *this; }
