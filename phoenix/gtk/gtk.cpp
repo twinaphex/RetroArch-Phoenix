@@ -133,7 +133,7 @@ string pOS::folderSelect(Window &parent, const string &path) {
 
   gtk_widget_destroy(dialog);
   if(name == "") return "";
-  if(name.endswith("/") == false) name.append("/");
+  if(strend(name, "/") == false) name.append("/");
   return name;
 }
 

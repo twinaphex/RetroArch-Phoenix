@@ -30,8 +30,6 @@ namespace nall {
     template<unsigned Limit = 0> inline string& qreplace(const char*, const char*);
     template<unsigned Limit = 0> inline string& iqreplace(const char*, const char*);
 
-    inline unsigned length() const;
-
     inline bool equals(const char*) const;
     inline bool iequals(const char*) const;
 
@@ -40,7 +38,6 @@ namespace nall {
 
     inline bool beginswith(const char*) const;
     inline bool ibeginswith(const char*) const;
-    inline bool endswith(const char*) const;
     inline bool iendswith(const char*) const;
 
     inline string& lower();

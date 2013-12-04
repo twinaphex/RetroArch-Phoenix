@@ -79,7 +79,7 @@ class ConfigFile
          {
             out = val;
             std::free(val);
-            return out.length() > 0;
+            return strlen(out) > 0;
          }
          return false;
       }

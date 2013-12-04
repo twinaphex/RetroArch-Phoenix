@@ -106,7 +106,7 @@ class PathSetting : public SettingLayout, public util::Shared<PathSetting>
             else if (path)
                start_path = path;
             string tmp = OS::fileLoad(Window::None, start_path, filter);
-            if (tmp.length() > 0)
+            if (strlen(tmp) > 0)
             {
                edit.setText(tmp);
                conf.set(key, tmp);
@@ -164,7 +164,7 @@ class DirSetting : public SettingLayout, public util::Shared<DirSetting>
             else if (path)
                start_path = path;
             string tmp = OS::folderSelect(Window::None, start_path);
-            if (tmp.length() > 0)
+            if (strlen(tmp) > 0)
             {
                edit.setText(tmp);
                conf.set(key, tmp);
@@ -794,7 +794,7 @@ class InputSetting : public SettingLayout, public util::Shared<InputSetting>
          }
 
          poll_elem->display = option;
-         if (ext.length() > 0)
+         if (strlen(ext) > 0)
             poll_elem->display.append(ext);
 
          msg_cb("");
@@ -1403,7 +1403,7 @@ class ExtROM : public ToggleWindow
       bool get_str(PathSetting::Ptr ptr, string& str)
       {
          string _str = ptr->edit.text();
-         if (_str.length() > 0)
+         if (strlen(_str) > 0)
          {
             str = _str;
             return true;

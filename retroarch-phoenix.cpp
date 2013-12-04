@@ -263,7 +263,7 @@ class Remote : public ToggleWindow
       void send_arg_cmd(const char *cmd)
       {
          string file = OS::fileLoad(Window::None, "", "XML shader, Cg shader, Cg-meta shader (*.shader,*.cg,*.cgp)");
-         if (file.length() == 0)
+         if (strlen(file) == 0)
             return;
 
          string cmd_str = { cmd, " ", file, "\n" };
@@ -293,7 +293,7 @@ class MainWindow : public Window
    public:
       MainWindow(const nall::string &libretro_path) :
          input(configs.cli), general(configs.gui, configs.cli), video(configs.cli), audio(configs.cli), ext_rom(configs.gui),
-         m_cli_path(libretro_path), load_no_rom(false), m_cli_custom_path(libretro_path.length())
+         m_cli_path(libretro_path), load_no_rom(false), m_cli_custom_path(strlen(libretro_path))
       {
          setTitle("RetroArch || Phoenix");
          setIcon("/usr/share/icons/retroarch-phoenix.png");
@@ -449,7 +449,7 @@ class MainWindow : public Window
                string path;
                path = this->getPath();
                
-               if (path.length() > 0)
+               if (strlen(path) > 0)
                {
                   char buf[1024];
                   nall::strlcpy(buf, path, sizeof(buf));
@@ -465,7 +465,7 @@ class MainWindow : public Window
                   else
                      start_path = ".";
                }
-               else if (default_start_path.length() > 0)
+               else if (strlen(default_start_path) > 0)
                   start_path = default_start_path;
                else
                {
@@ -478,17 +478,17 @@ class MainWindow : public Window
                if (save_file)
                {
                   file = OS::fileSave(Window::None, start_path, filter);
-                  if (file.length() > 0 && !file.endswith(short_filter))
+                  if (strlen(file) > 0 && !strend(file, short_filter))
                      file.append(short_filter);
                }
                else
                   file = OS::fileLoad(Window::None, start_path, filter);
 
-               if (file.length() > 0)
+               if (strlen(file) > 0)
                {
                   edit.setText(file);
 
-                  if (short_filter.length() > 0 && !file.endswith(short_filter))
+                  if (strlen(short_filter) > 0 && !strend(file, short_filter))
                   {
                      MessageWindow::warning(Window::None,
                            {"Filename extension does not match with the expected extension: \"",
@@ -529,7 +529,7 @@ class MainWindow : public Window
          }
 
          void setLabel(const string& name) { label.setText(name); }
-         void setPath(const string& name) { edit.setText(name.length() > 0 ? name : string("")); cb(this->getPath()); }
+         void setPath(const string& name) { edit.setText(strlen(name) > 0 ? name : string("")); cb(this->getPath()); }
          void setConfig(ConfigFile& file, const string& key, const function<void (const string&)>& _cb = &entry::dummy) 
          { 
             conf = &file;
@@ -918,10 +918,10 @@ class MainWindow : public Window
             start_path = ".";
 
          string file = OS::fileSave(Window::None, start_path, "Config File (*.cfg)");
-         if (file.length() > 0 && !file.endswith(".cfg"))
+         if (strlen(file) > 0 && !strend(file, ".cfg"))
             file.append(".cfg");
 
-         if (file.length() > 0)
+         if (strlen(file) > 0)
          {
             configs.cli.write(file);
             configs.cli.replace_path(file);
@@ -978,7 +978,7 @@ class MainWindow : public Window
       void reload_cli_config(const string& path)
       {
          print("Reloading config: ", path, "\n");
-         if (path.length() > 0)
+         if (strlen(path) > 0)
          {
             configs.cli = ConfigFile(path);
             m_cli_path = path;
@@ -1159,14 +1159,14 @@ end:
          bool sufami_a = false, sufami_b = false;
          bool slotted = false;
 
-         if (load_no_rom && rom_path.length() == 0)
+         if (load_no_rom && strlen(rom_path) == 0)
             return true;
 
          switch (rom_type.type())
          {
             case Normal:
                rom_path = rom.getPath();
-               if (rom_path.length() == 0)
+               if (strlen(rom_path) == 0)
                {
                   show_error("No ROM selected :(");
                   return false;
@@ -1261,7 +1261,7 @@ end:
 
 #if 0
          string sysdir;
-         if (!configs.cli.get("system_directory", sysdir) || sysdir.length() == 0)
+         if (!configs.cli.get("system_directory", sysdir) || strlen(sysdir) == 0)
          {
             MessageWindow::warning(*this,
                   "System directory (Settings -> General -> System directory) is not set.\n"
@@ -1271,7 +1271,7 @@ end:
 
          linear_vector<const char*> vec_cmd;
          string retroarch_path = retroarch.getPath();
-         if (retroarch_path.length() == 0) retroarch_path = "retroarch";
+         if (strlen(retroarch_path) == 0) retroarch_path = "retroarch";
          string rom_path;
          string config_path = config.getPath();
          string host;
@@ -1289,7 +1289,7 @@ end:
             return;
 
          vec_cmd.append("-c");
-         if (config_path.length() > 0)
+         if (strlen(config_path) > 0)
             vec_cmd.append(config_path);
          else
             vec_cmd.append(m_cli_path);
@@ -1319,7 +1319,7 @@ end:
             vec_cmd.append(frames);
 
             nickname = net.nick.text();
-            if (nickname.length() > 0)
+            if (strlen(nickname) > 0)
             {
                vec_cmd.append("--nick");
                vec_cmd.append(nickname);
@@ -1361,13 +1361,13 @@ end:
          }
 
          record_config_path = record_config.getPath();
-         if (record_config_path.length() > 0)
+         if (strlen(record_config_path) > 0)
          {
             vec_cmd.append("--recordconfig");
             vec_cmd.append(record_config_path);
          }
 
-         if (record.dim_edit.text().length() > 0)
+         if (strlen(record.dim_edit.text()) > 0)
          {
             if (!record.is_enabled())
             {

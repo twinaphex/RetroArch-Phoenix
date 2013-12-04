@@ -3,16 +3,8 @@
 
 namespace nall {
 
-unsigned string::length() const { return strlen(data); }
-
 bool string::equals(const char *str) const { return !strcmp(data, str); }
 bool string::iequals(const char *str) const { return !istrcmp(data, str); }
-
-bool string::beginswith(const char *str) const { return strbegin(data, str); }
-bool string::ibeginswith(const char *str) const { return istrbegin(data, str); }
-
-bool string::endswith(const char *str) const { return strend(data, str); }
-bool string::iendswith(const char *str) const { return istrend(data, str); }
 
 string& string::lower() { strlower(data); return *this; }
 string& string::upper() { strupper(data); return *this; }

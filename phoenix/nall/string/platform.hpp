@@ -8,7 +8,7 @@ string currentpath() {
   if(::getcwd(path)) {
     string result(path);
     result.transform("\\", "/");
-    if(result.endswith("/") == false) result.append("/");
+    if(strend(result, "/") == false) result.append("/");
     return result;
   }
   return "./";
@@ -19,7 +19,7 @@ string userpath() {
   if(::userpath(path)) {
     string result(path);
     result.transform("\\", "/");
-    if(result.endswith("/") == false) result.append("/");
+    if(strend(result, "/") == false) result.append("/");
     return result;
   }
   return currentpath();
