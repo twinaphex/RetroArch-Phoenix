@@ -40,12 +40,6 @@ namespace nall {
     inline bool ibeginswith(const char*) const;
     inline bool iendswith(const char*) const;
 
-    inline string& lower();
-    inline string& upper();
-    inline string& qlower();
-    inline string& qupper();
-    inline string& transform(const char *before, const char *after);
-
     template<unsigned limit = 0> inline string& ltrim(const char *key = " ");
     template<unsigned limit = 0> inline string& rtrim(const char *key = " ");
     template<unsigned limit = 0> inline string& trim(const char *key = " ", const char *rkey = 0);

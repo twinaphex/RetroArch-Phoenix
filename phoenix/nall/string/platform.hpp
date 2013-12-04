@@ -6,9 +6,10 @@ namespace nall {
 string currentpath() {
   char path[PATH_MAX];
   if(::getcwd(path)) {
+    strtr(path, "\\", "/");
+    if(strend(path, "/") == false)
+       strlcat(path, "/", sizeof(path));
     string result(path);
-    result.transform("\\", "/");
-    if(strend(result, "/") == false) result.append("/");
     return result;
   }
   return "./";
@@ -17,9 +18,10 @@ string currentpath() {
 string userpath() {
   char path[PATH_MAX];
   if(::userpath(path)) {
+    strtr(path, "\\", "/");
+    if(strend(path, "/") == false)
+       strlcat(path, "/", sizeof(path));
     string result(path);
-    result.transform("\\", "/");
-    if(strend(result, "/") == false) result.append("/");
     return result;
   }
   return currentpath();
@@ -28,8 +30,8 @@ string userpath() {
 string realpath(const char *name) {
   char path[PATH_MAX];
   if(::realpath(name, path)) {
+    strtr(path, "\\", "/");
     string result(path);
-    result.transform("\\", "/");
     return result;
   }
   return userpath();

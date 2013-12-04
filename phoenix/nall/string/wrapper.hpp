@@ -3,8 +3,6 @@
 
 namespace nall {
 
-string& string::transform(const char *before, const char *after) { strtr(data, before, after); return *this; }
-
 template<unsigned limit> string& string::ltrim(const char *key) { nall::ltrim<limit>(data, key); return *this; }
 template<unsigned limit> string& string::rtrim(const char *key) { nall::rtrim<limit>(data, key); return *this; }
 template<unsigned limit> string& string::trim(const char *key, const char *rkey) { nall::trim <limit>(data, key, rkey); return *this; }
