@@ -9,7 +9,7 @@
 #include <nall/string/base.hpp>
 #include <nall/string/core.hpp>
 #include <nall/string/cast.hpp>
-#include <nall/string/compare.hpp>
+#include <nall/string/compare.h>
 #include <nall/string/convert.hpp>
 #include <nall/string/platform.hpp>
 #include <nall/string/strl.hpp>

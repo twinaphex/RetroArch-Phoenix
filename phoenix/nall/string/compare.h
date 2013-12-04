@@ -1,5 +1,5 @@
-#ifndef NALL_STRING_COMPARE_HPP
-#define NALL_STRING_COMPARE_HPP
+#ifndef NALL_STRING_COMPARE_H
+#define NALL_STRING_COMPARE_H
 
 static inline char chrlower(char c)
 {
