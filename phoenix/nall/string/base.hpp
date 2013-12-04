@@ -101,10 +101,6 @@ namespace nall {
   inline uintmax_t binary(const char *str);
   inline double fp(const char *str);
 
-  //math.hpp
-  inline bool strint(const char *str, int &result);
-  inline bool strmath(const char *str, int &result);
-
   //platform.hpp
   inline string realpath(const char *name);
   inline string userpath();
@@ -118,7 +114,6 @@ namespace nall {
   inline optional<unsigned> strpos(const char *str, const char *key);
   inline optional<unsigned> istrpos(const char *str, const char *key);
   inline optional<unsigned> qstrpos(const char *str, const char *key);
-  inline optional<unsigned> iqstrpos(const char *str, const char *key);
   template<bool Insensitive = false, bool Quoted = false> inline optional<unsigned> ustrpos(const char *str, const char *key);
 
   //trim.hpp
