@@ -1,5 +1,5 @@
-#ifndef NALL_DETECT_HPP
-#define NALL_DETECT_HPP
+#ifndef NALL_DETECT_H
+#define NALL_DETECT_H
 
 /* Compiler detection */
 

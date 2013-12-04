@@ -1,5 +1,5 @@
-#ifndef NALL_PLATFORM_HPP
-#define NALL_PLATFORM_HPP
+#ifndef NALL_PLATFORM_H
+#define NALL_PLATFORM_H
 
 #if defined(_WIN32)
   //minimum version needed for _wstat64, etc

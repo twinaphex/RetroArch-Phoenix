@@ -1,5 +1,5 @@
-#ifndef NALL_BIT_HPP
-#define NALL_BIT_HPP
+#ifndef NALL_BIT_H
+#define NALL_BIT_H
 
 //round up to next highest single bit:
 //round(15) == 16, round(16) == 16, round(17) == 32

@@ -1,7 +1,7 @@
 #ifndef NALL_FILE_HPP
 #define NALL_FILE_HPP
 
-#include <nall/platform.hpp>
+#include <nall/platform.h>
 #include <stdint.h>
 #include <nall/string.hpp>
 #include <nall/utility.hpp>

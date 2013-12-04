@@ -7,11 +7,11 @@
 #ifndef RUBY_H
 #define RUBY_H
 
-#include <nall/algorithm.hpp>
+#include <nall/algorithm.h>
 #include <nall/any.hpp>
 #include <nall/array.hpp>
-#include <nall/bit.hpp>
-#include <nall/detect.hpp>
+#include <nall/bit.h>
+#include <nall/detect.h>
 #include <nall/input.hpp>
 #include <stdint.h>
 #include <nall/string.hpp>

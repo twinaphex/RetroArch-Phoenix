@@ -3,7 +3,7 @@
 
 #include <initializer_list>
 #include <nall/array.hpp>
-#include <nall/platform.hpp>
+#include <nall/platform.h>
 #include <nall/utility.hpp>
 
 #include <nall/string/base.hpp>

@@ -5,8 +5,8 @@
 #include <initializer_list>
 #include <type_traits>
 #include <utility>
-#include <nall/algorithm.hpp>
-#include <nall/bit.hpp>
+#include <nall/algorithm.h>
+#include <nall/bit.h>
 #include <nall/concept.hpp>
 #include <nall/foreach.hpp>
 #include <nall/utility.hpp>

@@ -2,7 +2,7 @@
 #define NALL_REFERENCE_ARRAY_HPP
 
 #include <type_traits>
-#include <nall/bit.hpp>
+#include <nall/bit.h>
 #include <nall/concept.hpp>
 
 namespace nall {

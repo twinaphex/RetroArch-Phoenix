@@ -1,5 +1,5 @@
-#ifndef NALL_ALGORITHM_HPP
-#define NALL_ALGORITHM_HPP
+#ifndef NALL_ALGORITHM_H
+#define NALL_ALGORITHM_H
 
 #undef min
 #undef max
