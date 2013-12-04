@@ -29,9 +29,7 @@ template<unsigned Limit, bool Insensitive, bool Quoted> lstring& lstring::usplit
 }
 
 template<unsigned Limit> lstring& lstring::split(const char *key, const char *src) { return usplit<Limit, false, false>(key, src); }
-template<unsigned Limit> lstring& lstring::isplit(const char *key, const char *src) { return usplit<Limit, true, false>(key, src); }
 template<unsigned Limit> lstring& lstring::qsplit(const char *key, const char *src) { return usplit<Limit, false, true>(key, src); }
-template<unsigned Limit> lstring& lstring::iqsplit(const char *key, const char *src) { return usplit<Limit, true, true>(key, src); }
 
 };
 

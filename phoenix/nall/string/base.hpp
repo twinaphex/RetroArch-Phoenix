@@ -85,9 +85,7 @@ namespace nall {
 
     inline optional<unsigned> find(const char*) const;
     template<unsigned Limit = 0> inline lstring& split(const char*, const char*);
-    template<unsigned Limit = 0> inline lstring& isplit(const char*, const char*);
     template<unsigned Limit = 0> inline lstring& qsplit(const char*, const char*);
-    template<unsigned Limit = 0> inline lstring& iqsplit(const char*, const char*);
 
     lstring();
     lstring(std::initializer_list<string>);
