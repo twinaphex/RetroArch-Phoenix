@@ -44,11 +44,6 @@ namespace nall {
     template<unsigned limit = 0> inline string& rtrim(const char *key = " ");
     template<unsigned limit = 0> inline string& trim(const char *key = " ", const char *rkey = 0);
 
-    inline optional<unsigned> position(const char *key) const;
-    inline optional<unsigned> iposition(const char *key) const;
-    inline optional<unsigned> qposition(const char *key) const;
-    inline optional<unsigned> iqposition(const char *key) const;
-
     inline operator const char*() const;
     inline char* operator()();
     inline char& operator[](int);

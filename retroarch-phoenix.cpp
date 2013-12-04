@@ -1376,7 +1376,7 @@ end:
             }
 
             auto str = record.dim_edit.text();
-            auto pos = str.iposition("x");
+            auto pos = istrpos(str, "x");
 
             if (pos)
             {
