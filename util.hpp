@@ -41,24 +41,6 @@ namespace util
          return std::make_shared<T>(std::forward<P>(args)...); 
       }
    };
-
-   template <class T>
-   struct UniqueAbstract
-   {
-      typedef typename Internal::DeclareUnique<T>::type AUPtr;
-   };
-
-   template <class T>
-   struct Unique
-   {
-      typedef typename Internal::DeclareUnique<T>::type UPtr;
-
-      template <class... P>
-      static UPtr shared(P&&... args) 
-      { 
-         return std::unique_ptr<T>(new T(std::forward<P>(args)...)); 
-      }
-   };
 }
 
 
