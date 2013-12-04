@@ -19,13 +19,6 @@ template<typename T> lstring& lstring::operator<<(T value) {
   operator[](size()).assign(to_string<T>(value));
   return *this;
 }
-
-#if defined(QSTRING_H)
-template<> inline const char* to_string<QString>(QString v) { return v.toUtf8().constData(); }
-template<> inline const char* to_string<const QString&>(const QString &v) { return v.toUtf8().constData(); }
-string::operator QString() const { return QString::fromUtf8(*this); }
-#endif
-
 }
 
 #endif

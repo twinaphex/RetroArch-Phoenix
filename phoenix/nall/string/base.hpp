@@ -72,11 +72,6 @@ namespace nall {
     unsigned size;
 
     template<unsigned Limit, bool Insensitive, bool Quoted> inline string& ureplace(const char*, const char*);
-
-  #if defined(QSTRING_H)
-  public:
-    inline operator QString() const;
-  #endif
   };
 
   class lstring : public linear_vector<string> {
