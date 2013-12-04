@@ -3,13 +3,6 @@
 
 namespace nall {
 
-bool string::equals(const char *str) const { return !strcmp(data, str); }
-bool string::iequals(const char *str) const { return !istrcmp(data, str); }
-
-string& string::lower() { strlower(data); return *this; }
-string& string::upper() { strupper(data); return *this; }
-string& string::qlower() { qstrlower(data); return *this; }
-string& string::qupper() { qstrupper(data); return *this; }
 string& string::transform(const char *before, const char *after) { strtr(data, before, after); return *this; }
 
 template<unsigned limit> string& string::ltrim(const char *key) { nall::ltrim<limit>(data, key); return *this; }
