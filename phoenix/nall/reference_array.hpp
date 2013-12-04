@@ -32,7 +32,7 @@ namespace nall {
     }
 
     void resize(unsigned newsize) {
-      if(newsize > poolsize) reserve(bit::round(newsize));
+      if(newsize > poolsize) reserve(round(newsize));
       buffersize = newsize;
     }
 

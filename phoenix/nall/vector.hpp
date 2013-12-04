@@ -44,7 +44,7 @@ namespace nall {
     }
 
     void reserve(unsigned newsize) {
-      newsize = bit::round(newsize);  //round to nearest power of two (for amortized growth)
+      newsize = round(newsize);  //round to nearest power of two (for amortized growth)
 
       T *poolcopy = (T*)calloc(newsize, sizeof(T));
       for(unsigned i = 0; i < min(objectsize, newsize); i++) new(poolcopy + i) T(pool[i]);
@@ -181,7 +181,7 @@ namespace nall {
     }
 
     void reserve(unsigned newsize) {
-      newsize = bit::round(newsize);  //round to nearest power of two (for amortized growth)
+      newsize = round(newsize);  //round to nearest power of two (for amortized growth)
 
       for(unsigned i = newsize; i < objectsize; i++) {
         if(pool[i]) { delete pool[i]; pool[i] = 0; }
