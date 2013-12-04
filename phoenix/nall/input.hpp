@@ -88,31 +88,6 @@ struct Keyboard {
     return false;
   }
 
-  static uint16_t decode(const char *name) {
-    string s(name);
-    if(!strbegin(name, "KB")) return 0;
-    s.ltrim("KB");
-    unsigned id = decimal(s);
-    auto pos = strpos(s, "::");
-    if(!pos) return 0;
-    s = substr(s, pos() + 2);
-    for(unsigned i = 0; i < Limit; i++) {
-      if(s == KeyboardScancodeName[i]) return Base + Size * id + i;
-    }
-    return 0;
-  }
-
-  string encode(uint16_t code) const {
-    unsigned index = 0;
-    for(unsigned i = 0; i < Count; i++) {
-      if(code >= Base + Size * i && code < Base + Size * (i + 1)) {
-        index = code - (Base + Size * i);
-        break;
-      }
-    }
-    return { "KB", ID, "::", KeyboardScancodeName[index] };
-  }
-
   uint16_t operator[](Scancode code) const { return Base + ID * Size + code; }
   uint16_t key(unsigned id) const { return Base + Size * ID + id; }
   bool isKey(unsigned id) const { return id >= key(Escape) && id <= key(Menu); }
@@ -211,30 +186,6 @@ struct Joypad {
     return false;
   }
 
-  static uint16_t decode(const char *name) {
-    string s(name);
-    if(!strbegin(name, "JP")) return 0;
-    s.ltrim("JP");
-    unsigned id = decimal(s);
-    auto pos = strpos(s, "::");
-    if(!pos) return 0;
-    s = substr(s, pos() + 2);
-    for(unsigned i = 0; i < Limit; i++) {
-      if(s == JoypadScancodeName[i]) return Base + Size * id + i;
-    }
-    return 0;
-  }
-
-  string encode(uint16_t code) const {
-    unsigned index = 0;
-    for(unsigned i = 0; i < Count; i++) {
-      if(code >= Base + Size * i && code < Base + Size * (i + 1)) {
-        index = code - (Base + Size * i);
-      }
-    }
-    return { "JP", ID, "::", JoypadScancodeName[index] };
-  }
-
   uint16_t operator[](Scancode code) const { return Base + ID * Size + code; }
   uint16_t hat(unsigned id) const { return Base + Size * ID + Hat0 + id; }
   uint16_t axis(unsigned id) const { return Base + Size * ID + Axis0 + id; }
@@ -257,25 +208,6 @@ static inline Joypad& joypad(unsigned id) {
 
 struct Scancode {
   enum { None = 0, Limit = Joypad::Base + Joypad::Size * Joypad::Count };
-
-  static uint16_t decode(const char *name) {
-    uint16_t code;
-    code = Keyboard::decode(name);
-    if(code) return code;
-    code = Joypad::decode(name);
-    if(code) return code;
-    return None;
-  }
-
-  static string encode(uint16_t code) {
-    for(unsigned i = 0; i < Keyboard::Count; i++) {
-      if(keyboard(i).belongsTo(code)) return keyboard(i).encode(code);
-    }
-    for(unsigned i = 0; i < Joypad::Count; i++) {
-      if(joypad(i).belongsTo(code)) return joypad(i).encode(code);
-    }
-    return "None";
-  }
 };
 
 }
