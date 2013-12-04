@@ -8,14 +8,6 @@
 #include <nall/windows/utf8.hpp>
 
 namespace nall {
-  inline FILE* fopen_utf8(const string &utf8_filename, const char *mode) {
-    #if !defined(_WIN32)
-    return fopen(utf8_filename, mode);
-    #else
-    return _wfopen(utf16_t(utf8_filename), utf16_t(mode));
-    #endif
-  }
-
   class file {
   public:
     enum class mode : unsigned { read, write, readwrite, writeread };
@@ -48,23 +40,6 @@ namespace nall {
       return buffer[(file_offset++) & buffer_mask];
     }
 
-    uintmax_t readl(unsigned length = 1) {
-      uintmax_t data = 0;
-      for(int i = 0; i < length; i++) {
-        data |= (uintmax_t)read() << (i << 3);
-      }
-      return data;
-    }
-
-    uintmax_t readm(unsigned length = 1) {
-      uintmax_t data = 0;
-      while(length--) {
-        data <<= 8;
-        data |= read();
-      }
-      return data;
-    }
-
     void read(uint8_t *buffer, unsigned length) {
       while(length--) *buffer++ = read();
     }
@@ -78,19 +53,6 @@ namespace nall {
       if(file_offset > file_size) file_size = file_offset;
     }
 
-    void writel(uintmax_t data, unsigned length = 1) {
-      while(length--) {
-        write(data);
-        data >>= 8;
-      }
-    }
-
-    void writem(uintmax_t data, unsigned length = 1) {
-      for(int i = length - 1; i >= 0; i--) {
-        write(data >> (i << 3));
-      }
-    }
-
     void write(const uint8_t *buffer, unsigned length) {
       while(length--) write(*buffer++);
     }
@@ -101,66 +63,9 @@ namespace nall {
       while(*p) write(*p++);
     }
 
-    void flush() {
-      buffer_flush();
-      fflush(fp);
-    }
-
-    void seek(int offset, index index_ = index::absolute) {
-      if(!fp) return;  //file not open
-      buffer_flush();
-
-      uintmax_t req_offset = file_offset;
-      switch(index_) {
-        case index::absolute: req_offset  = offset; break;
-        case index::relative: req_offset += offset; break;
-      }
-
-      if(req_offset < 0) req_offset = 0;  //cannot seek before start of file
-      if(req_offset > file_size) {
-        if(file_mode == mode::read) {     //cannot seek past end of file
-          req_offset = file_size;
-        } else {                          //pad file to requested location
-          file_offset = file_size;
-          while(file_size < req_offset) write(0x00);
-        }
-      }
-
-      file_offset = req_offset;
-    }
-
-    int offset() {
-      if(!fp) return -1;  //file not open
-      return file_offset;
-    }
-
     int size() {
       if(!fp) return -1;  //file not open
       return file_size;
-    }
-
-    bool truncate(unsigned size) {
-      if(!fp) return false;  //file not open
-      #if !defined(_WIN32)
-      return ftruncate(fileno(fp), size) == 0;
-      #else
-      return _chsize(fileno(fp), size) == 0;
-      #endif
-    }
-
-    bool end() {
-      if(!fp) return true;  //file not open
-      return file_offset >= file_size;
-    }
-
-    static bool exists(const string &filename) {
-      #if !defined(_WIN32)
-      struct stat data;
-      return stat(filename, &data) == 0;
-      #else
-      struct __stat64 data;
-      return _wstat64(utf16_t(filename), &data) == 0;
-      #endif
     }
 
     static uintmax_t size(const string &filename) {
@@ -172,21 +77,6 @@ namespace nall {
       _wstat64(utf16_t(filename), &data);
       #endif
       return S_ISREG(data.st_mode) ? data.st_size : 0u;
-    }
-
-    static time_t timestamp(const string &filename, file::time mode = file::time::create) {
-      #if !defined(_WIN32)
-      struct stat data;
-      stat(filename, &data);
-      #else
-      struct __stat64 data;
-      _wstat64(utf16_t(filename), &data);
-      #endif
-      switch(mode) { default:
-        case file::time::create: return data.st_ctime;
-        case file::time::modify: return data.st_mtime;
-        case file::time::access: return data.st_atime;
-      }
     }
 
     bool open() {
