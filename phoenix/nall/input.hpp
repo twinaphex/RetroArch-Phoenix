@@ -10,23 +10,6 @@
 
 namespace nall {
 
-static const char KeyboardScancodeName[][64] = {
-  "Escape", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12",
-  "PrintScreen", "ScrollLock", "Pause", "Tilde",
-  "Num1", "Num2", "Num3", "Num4", "Num5", "Num6", "Num7", "Num8", "Num9", "Num0",
-  "Dash", "Equal", "Backspace",
-  "Insert", "Delete", "Home", "End", "PageUp", "PageDown",
-  "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
-  "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
-  "LeftBracket", "RightBracket", "Backslash", "Semicolon", "Apostrophe", "Comma", "Period", "Slash",
-  "Keypad1", "Keypad2", "Keypad3", "Keypad4", "Keypad5", "Keypad6", "Keypad7", "Keypad8", "Keypad9", "Keypad0",
-  "Point", "Enter", "Add", "Subtract", "Multiply", "Divide",
-  "NumLock", "CapsLock",
-  "Up", "Down", "Left", "Right",
-  "Tab", "Return", "Spacebar", "Menu",
-  "Shift", "Control", "Alt", "Super",
-};
-
 struct Keyboard;
 static inline Keyboard& keyboard(unsigned id = 0);
 
@@ -104,16 +87,6 @@ static inline Keyboard& keyboard(unsigned id) {
     case 4: return kb4; case 5: return kb5; case 6: return kb6; case 7: return kb7;
   }
 }
-
-static const char JoypadScancodeName[][64] = {
-  "Hat0", "Hat1", "Hat2", "Hat3", "Hat4", "Hat5", "Hat6", "Hat7",
-  "Axis0", "Axis1", "Axis2", "Axis3", "Axis4", "Axis5", "Axis6", "Axis7",
-  "Axis8", "Axis9", "Axis10", "Axis11", "Axis12", "Axis13", "Axis14", "Axis15",
-  "Button0", "Button1", "Button2", "Button3", "Button4", "Button5", "Button6", "Button7",
-  "Button8", "Button9", "Button10", "Button11", "Button12", "Button13", "Button14", "Button15",
-  "Button16", "Button17", "Button18", "Button19", "Button20", "Button21", "Button22", "Button23",
-  "Button24", "Button25", "Button26", "Button27", "Button28", "Button29", "Button30", "Button31",
-};
 
 struct Joypad;
 static inline Joypad& joypad(unsigned id = 0);
